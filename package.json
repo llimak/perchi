@@ -1,6 +1,6 @@
 {
   "name": "perchi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Implementation of classical ciphers.",
   "main": "./src/index.js",
   "scripts": {
