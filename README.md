@@ -1,13 +1,13 @@
-# cipher-js
+# perchi
 
 <br/>
 
-cipher-js is the implementation of ciphers like Caesar or Vigenère in JavaScript.
+perchi is the implementation of ciphers like Caesar or Vigenère in JavaScript.
 
 ## Install
 
 ```
-$ npm install cipher-js
+$ npm install perchi
 ```
 
 <br/>
@@ -17,13 +17,13 @@ $ npm install cipher-js
 You can use the cipher-js by`import`-ing the module:
 
 ```js
-import cipher from "cipher-js";
+import cipher from "perchi";
 ```
 
 or use `require`:
 
 ```js
-const { cipher } = require("cipher-js");
+const { cipher } = require("perchi");
 ```
 
 It returns collections of utility `classes`. Each cipher implementation has `encrypt` and `decrypt` methods which are synchronous. If you expect time consuming computation for example encrypting/decrypting long text you can use asynchronous methods: `encryptAsync` and `decryptAsync`. Some of ciphers has implemented `breakCipher` functions that break the code for example by brute-force atack. By default ciphers implementations use the following alphabet: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`.
