@@ -52,4 +52,4 @@ cipher.AtbashCipher.decrypt("Bżaimw rśęnź ożąk", polishAlphabet);
 
 ## License
 
-ISC © [KamilPopczyk](https://github.com/KamilPopczyk)
+ISC © [KamilPopczyk](https://github.com/llimak)
