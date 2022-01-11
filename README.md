@@ -19,6 +19,7 @@ $ npm install perchi
 - CaesarCipher
 - VigenereCipher
 - AtbashCipher
+- BaconCipher
 
 ## Usage
 
