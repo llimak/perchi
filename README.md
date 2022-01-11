@@ -4,6 +4,8 @@
 
 perchi is the implementation of ciphers like Caesar or Vigenère in JavaScript.
 
+Name 'perchi' is anagram: **'perchi' = 'cipher'**
+
 ## Install
 
 ```
