@@ -23,7 +23,7 @@ $ npm install perchi
 
 ## Usage
 
-You can use the cipher-js by`import`-ing the module:
+You can use the perchi by`import`-ing the module:
 
 ```js
 import CaesarCipher from "perchi";
@@ -40,11 +40,11 @@ It returns collections of utility `classes`. Each cipher implementation has `enc
 Example of Caesar cipher with left shift of 3:
 
 ```js
-CaesarCipher.encrypt("cipher-js is cool", -3);
-// zfmebo-gp fp zlli
+CaesarCipher.encrypt("perchi is cool", -3);
+// mbozef fp zlli
 
-CaesarCipher.decrypt("zfmebo-gp fp zlli", -3);
-// cipher-js is cool
+CaesarCipher.decrypt("mbozef fp zlli", -3);
+// perchi is cool
 ```
 
 Example of Atbash cipher with custom alphabet:
