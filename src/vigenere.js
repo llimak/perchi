@@ -25,10 +25,12 @@ class VigenereCipher extends Cipher {
           alphabet[
             (indexOfLetterInAlphabet + indexOfLetterInKey) % alphabet.length
           ];
-        cipherText +=
-          plainText[letterIndex] === plainText[letterIndex].toUpperCase()
-            ? selectedLetter.toUpperCase()
-            : selectedLetter.toLowerCase();
+        if (selectedLetter) {
+          cipherText +=
+            plainText[letterIndex] === plainText[letterIndex].toUpperCase()
+              ? selectedLetter.toUpperCase()
+              : selectedLetter.toLowerCase();
+        }
       }
     }
     return cipherText;
