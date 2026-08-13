@@ -112,4 +112,4 @@ In every sample the event loop completed a `setImmediate` turn before the asynch
 
 ## License
 
-ISC © [KamilPopczyk](https://github.com/llimak)
+ISC © [bypopdev](https://github.com/bypopdev)
