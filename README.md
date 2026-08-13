@@ -20,6 +20,10 @@ $ npm install perchi
 - VigenereCipher
 - AtbashCipher
 - BaconCipher
+- RailFenceCipher
+- AffineCipher
+- PlayfairCipher
+- ColumnarTranspositionCipher
 
 ## Usage
 
@@ -58,6 +62,35 @@ AtbashCipher.encrypt("Zażółć gęślą jaźń", polishAlphabet);
 AtbashCipher.decrypt("Bżaimw rśęnź ożąk", polishAlphabet);
 // Zażółć gęślą jaźń
 ```
+
+## Additional ciphers
+
+All ciphers in this package are educational classical ciphers, not secure encryption.
+
+```js
+const {
+  RailFenceCipher,
+  AffineCipher,
+  PlayfairCipher,
+  ColumnarTranspositionCipher,
+} = require("perchi");
+
+RailFenceCipher.encrypt("WEAREDISCOVEREDFLEEATONCE", 3);
+// WECRLTEERDSOEEFEAOCAIVDEN
+
+AffineCipher.encrypt("AFFINE CIPHER", 5, 8);
+// IHHWVC SWFRCP
+
+PlayfairCipher.encrypt("HIDETHEGOLDINTHETREESTUMP", "PLAYFAIR EXAMPLE");
+// BMODZBXDNABEKUDMUIXMMOUVIF
+
+ColumnarTranspositionCipher.encrypt("WEAREDISCOVEREDFLEEATONCE", "ZEBRAS");
+// EVLNACDTESEAROFODEECWIREE
+```
+
+`RailFenceCipher` takes an integer rail count. `AffineCipher` takes a multiplier that must be coprime with the alphabet length and a shift. `ColumnarTranspositionCipher` preserves every input character and uses a non-empty key.
+
+`PlayfairCipher` uses the standard 25-letter alphabet (`I` and `J` share a position), converts text to uppercase, ignores unsupported characters, and inserts `X` filler symbols for repeated or trailing letters. Decryption retains those filler symbols because it cannot reliably distinguish them from real `X` characters.
 
 ## Async performance
 
