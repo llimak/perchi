@@ -118,5 +118,19 @@ describe("BaconCipher cipher", () => {
         plainText
       );
     });
+    it("propagates errors raised in the worker", async () => {
+      try {
+        await BaconCipher.encryptAsync(
+          "A",
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456"
+        );
+        expect.fail("Expected async encryption to reject");
+      } catch (error) {
+        expect(error).to.be.instanceOf(RangeError);
+        expect(error.message).to.equal(
+          "Bacon cipher supports alphabets of at most 32 symbols"
+        );
+      }
+    });
   });
 });

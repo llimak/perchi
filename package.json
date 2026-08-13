@@ -3,6 +3,9 @@
   "version": "1.0.4",
   "description": "Implementation of classical ciphers.",
   "main": "./src/index.js",
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "test": "mocha"
   },

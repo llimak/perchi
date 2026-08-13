@@ -35,7 +35,7 @@ or use `require`:
 const { CaesarCipher } = require("perchi");
 ```
 
-It returns collections of utility `classes`. Each cipher implementation has `encrypt` and `decrypt` methods which are synchronous. If you expect time consuming computation for example encrypting/decrypting long text you can use asynchronous methods: `encryptAsync` and `decryptAsync`. Some of ciphers has implemented `breakCipher` functions that break the code for example by brute-force atack. By default ciphers implementations use the following alphabet: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`.
+It returns collections of utility `classes`. Each cipher implementation has `encrypt` and `decrypt` methods which are synchronous. For large input, use `encryptAsync` and `decryptAsync`; they run in a Node.js worker thread and return a `Promise`. Some of ciphers has implemented `breakCipher` functions that break the code for example by brute-force atack. By default ciphers implementations use the following alphabet: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`.
 
 Example of Caesar cipher with left shift of 3:
 
