@@ -59,6 +59,24 @@ AtbashCipher.decrypt("Bżaimw rśęnź ożąk", polishAlphabet);
 // Zażółć gęślą jaźń
 ```
 
+## Async performance
+
+Run the reproducible benchmark with:
+
+```sh
+npm run benchmark:async
+```
+
+The asynchronous methods use a Node.js worker thread. This keeps the main event loop available, but a newly created worker has startup and message-transfer overhead. On Node.js v24.16.0, arm64 with 15 logical CPU cores, using a 5 MiB Caesar input and five samples, the median results were:
+
+| Operation | Median time |
+| --- | ---: |
+| Synchronous completion | 253.4 ms |
+| Async dispatch to worker | 0.4 ms |
+| Async completion | 292.5 ms |
+
+In every sample the event loop completed a `setImmediate` turn before the asynchronous cipher completed. Use `encryptAsync` and `decryptAsync` when main-thread responsiveness matters; use the synchronous methods for small inputs or when lowest completion latency matters.
+
 ## License
 
 ISC © [KamilPopczyk](https://github.com/llimak)
