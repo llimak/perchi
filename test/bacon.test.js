@@ -70,6 +70,11 @@ describe("BaconCipher cipher", () => {
         "bbbbb",
       ]);
     });
+    it("rejects alphabets that cannot be represented with five symbols", () => {
+      expect(() => BaconCipher.makeCipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456")).to.throw(
+        RangeError
+      );
+    });
   });
   describe("encrypt", () => {
     it("simple case", () => {
@@ -104,6 +109,14 @@ describe("BaconCipher cipher", () => {
           polishAlphabet
         )
       ).to.equal("Zażółć gęślą jaźń");
+    });
+  });
+  describe("async methods", () => {
+    it("does not split Bacon groups when decrypting long ciphertext", async () => {
+      const plainText = "ABCDEFGHIJ";
+      expect(await BaconCipher.decryptAsync(BaconCipher.encrypt(plainText))).to.equal(
+        plainText
+      );
     });
   });
 });

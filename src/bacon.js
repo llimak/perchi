@@ -3,6 +3,9 @@ const { Cipher } = require("./../src/cipher.js");
 class BaconCipher extends Cipher {
   static makeCipher(configAlphabet) {
     const alphabet = configAlphabet || this.alphabet;
+    if (alphabet.length > 32) {
+      throw new RangeError("Bacon cipher supports alphabets of at most 32 symbols");
+    }
     const result = [];
     for (let letterIndex = 0; letterIndex < alphabet.length; letterIndex++) {
       let binaryRepresentation = Number(letterIndex).toString(2);

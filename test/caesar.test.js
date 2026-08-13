@@ -19,6 +19,11 @@ describe("CaesarCipher cipher", () => {
           CaesarCipher.makeCipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ", -3)
         ).to.equal("XYZABCDEFGHIJKLMNOPQRSTUVW");
       });
+      it("normalizes shifts smaller than the negative alphabet length", () => {
+        expect(CaesarCipher.makeCipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ", -29)).to.equal(
+          "XYZABCDEFGHIJKLMNOPQRSTUVW"
+        );
+      });
     });
     describe("encrypt", () => {
       it("left rotation of three places", () => {

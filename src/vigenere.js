@@ -3,6 +3,7 @@ const { Cipher } = require("./../src/cipher.js");
 class VigenereCipher extends Cipher {
   static encrypt(plainText, key, configAlphabet) {
     const alphabet = configAlphabet || this.alphabet;
+    const normalizedAlphabet = alphabet.toUpperCase();
     const cleanPlainText = configAlphabet
       ? plainText
       : plainText.normalize("NFD").replace(/\p{Diacritic}/gu, "");
@@ -12,11 +13,11 @@ class VigenereCipher extends Cipher {
       letterIndex < cleanPlainText.length;
       letterIndex++
     ) {
-      const indexOfLetterInAlphabet = alphabet
-        .toUpperCase()
-        .indexOf(cleanPlainText[letterIndex].toUpperCase());
-      const indexOfLetterInKey = alphabet.indexOf(
-        key[letterIndex % key.length]
+      const indexOfLetterInAlphabet = normalizedAlphabet.indexOf(
+        cleanPlainText[letterIndex].toUpperCase()
+      );
+      const indexOfLetterInKey = normalizedAlphabet.indexOf(
+        key[letterIndex % key.length].toUpperCase()
       );
       if (indexOfLetterInAlphabet < 0) {
         cipherText += cleanPlainText[letterIndex];
@@ -27,7 +28,8 @@ class VigenereCipher extends Cipher {
           ];
         if (selectedLetter) {
           cipherText +=
-            plainText[letterIndex] === plainText[letterIndex].toUpperCase()
+            cleanPlainText[letterIndex] ===
+            cleanPlainText[letterIndex].toUpperCase()
               ? selectedLetter.toUpperCase()
               : selectedLetter.toLowerCase();
         }
@@ -38,20 +40,27 @@ class VigenereCipher extends Cipher {
 
   static decrypt(cipherText, key, configAlphabet) {
     const alphabet = configAlphabet || this.alphabet;
+    const normalizedAlphabet = alphabet.toUpperCase();
     let plainText = "";
     for (let letterIndex = 0; letterIndex < cipherText.length; letterIndex++) {
-      const indexOfLetterInAlphabet = alphabet.indexOf(cipherText[letterIndex]);
-      const indexOfLetterInKey = alphabet.indexOf(
-        key[letterIndex % key.length]
+      const indexOfLetterInAlphabet = normalizedAlphabet.indexOf(
+        cipherText[letterIndex].toUpperCase()
+      );
+      const indexOfLetterInKey = normalizedAlphabet.indexOf(
+        key[letterIndex % key.length].toUpperCase()
       );
       if (indexOfLetterInAlphabet < 0) {
         plainText += cipherText[letterIndex];
       } else {
-        plainText +=
+        const selectedLetter =
           alphabet[
             (indexOfLetterInAlphabet - indexOfLetterInKey + alphabet.length) %
               alphabet.length
           ];
+        plainText +=
+          cipherText[letterIndex] === cipherText[letterIndex].toUpperCase()
+            ? selectedLetter.toUpperCase()
+            : selectedLetter.toLowerCase();
       }
     }
     return plainText;

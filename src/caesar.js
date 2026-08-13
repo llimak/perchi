@@ -3,8 +3,7 @@ const { Cipher } = require("./../src/cipher.js");
 class CaesarCipher extends Cipher {
   static makeCipher(alphabet, shiftConfig) {
     const shift =
-      (shiftConfig < 0 ? alphabet.length + shiftConfig : shiftConfig) %
-      alphabet.length;
+      ((shiftConfig % alphabet.length) + alphabet.length) % alphabet.length;
     return (
       alphabet.substring(shift, alphabet.length) + alphabet.substring(0, shift)
     );

@@ -28,6 +28,9 @@ describe("vigenre cipher", () => {
         "WVXAIJCM ql UHIY"
       );
     });
+    it("accepts lowercase plaintext and key", () => {
+      expect(VigenereCipher.encrypt("attack", "lemon")).to.equal("lxfopv");
+    });
   });
   describe("decrypt", () => {
     it("simple case", () => {
@@ -43,6 +46,25 @@ describe("vigenre cipher", () => {
     it("plaintext has space", () => {
       expect(VigenereCipher.decrypt("WVXAIJCM QL UHIY", "UNITEST")).to.equal(
         "CIPHERJS IS COOL"
+      );
+    });
+    it("decrypts lowercase ciphertext", () => {
+      expect(VigenereCipher.decrypt("lxfopv", "lemon")).to.equal("attack");
+    });
+    it("round-trips lowercase plaintext and key", () => {
+      const plainText = "attack at dawn";
+      const key = "lemon";
+      expect(VigenereCipher.decrypt(VigenereCipher.encrypt(plainText, key), key)).to.equal(
+        plainText
+      );
+    });
+  });
+  describe("async methods", () => {
+    it("preserves Vigenere key alignment across long text", async () => {
+      const plainText = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".repeat(3);
+      const key = "LEMON";
+      expect(await VigenereCipher.encryptAsync(plainText, key)).to.equal(
+        VigenereCipher.encrypt(plainText, key)
       );
     });
   });
